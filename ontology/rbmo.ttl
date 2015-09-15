@@ -4,7 +4,6 @@
 @prefix dc:     <http://purl.org/dc/elements/1.1/> .
 @prefix foaf:   <http://xmlns.com/foaf/0.1/> .
 @prefix rbmo:   <http://www.purl.org/rbm/rbmo#> .
-@prefix people: <http://www.purl.org/rbm/people#> .
 
 <> a foaf:Document ;
     rdfs:label "RBMO Definition"@en;
@@ -137,12 +136,18 @@ rbmo:rateOf a owl:ObjectProperty ;
     rdfs:range rbmo:Rule ;
     owl:inverseOf rbmo:rule .
 
-rbmo:subrule a owl:ObjectProperty ;
+rbmo:hasSubrule a owl:ObjectProperty ;
     rdfs:isDefinedBy rbmo: ;
-    rdfs:label "subrule"@en ;
+    rdfs:label "hasSubrule"@en ;
     rdfs:comment "Specifies that a rule has a subrule, for example part of a KaSim rule which uses tokens. Its value is the identifier for the subrule."@en ;
     rdfs:domain rbmo:Rule ;
     rdfs:range rbmo:Rule .
+
+rbmo:subruleOf a owl:ObjectProperty ;
+    rdfs:isDefinedBy rbmo: ;
+    rdfs:label "subruleOf"@en ;
+    rdfs:comment "Specifies that a rule is subrule of another rule."@en ;
+    owl:inverseOf rbmo:hasSubrule .
 
 rbmo:hasSite a owl:ObjectProperty ;
     rdfs:isDefinedBy rbmo: ;
