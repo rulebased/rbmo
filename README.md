@@ -38,9 +38,9 @@ The model represents the combination of a two-component system and a promoter ar
 | hasConfiguration | Specifies that a special configuration of an agent includes additional information.|
 
 ##Contributors
-![alt tag;float left](images/newcastle.gif)
+![alt tag](images/newcastle.gif) ![alt tag](images/icos.png)
 
-![alt tag;float left](images/edinburgh.png)
+![alt tag](images/edinburgh2.png)
 
 Turing Ate My Hamster LTD
 
