@@ -44,5 +44,6 @@ The model represents the combination of a two-component system and a promoter ar
 
 Turing Ate My Hamster LTD
 
-
+##Contact
+If you are interested in the development of RBMO, please email: rbmontology@gmail.com 
 
