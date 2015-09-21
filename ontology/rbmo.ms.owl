@@ -1,0 +1,329 @@
+Prefix: : <http://www.purl.org/rbm/rbmo#>
+Prefix: dc: <http://purl.org/dc/elements/1.1/>
+Prefix: owl: <http://www.w3.org/2002/07/owl#>
+Prefix: rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+Prefix: xml: <http://www.w3.org/XML/1998/namespace>
+Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
+Prefix: foaf: <http://xmlns.com/foaf/0.1/>
+Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+
+Ontology: <http://www.purl.org/rbm/rbmo#>
+
+
+Annotations: 
+    rdfs:comment "RBMO - An ontology for annotating rule-based models"@en,
+    dc:creator "Goksel Misirli",
+    rdfs:label "Rule-Based Model Ontology"@en,
+    dc:creator "Matthew Pocock",
+    dc:creator "William Waites",
+    dc:creator "Matteo Cavaliere"
+
+AnnotationProperty: rdfs:seeAlso
+
+    
+AnnotationProperty: dc:creator
+
+    
+AnnotationProperty: dc:date
+
+    
+AnnotationProperty: rdfs:label
+
+    
+AnnotationProperty: rdfs:comment
+
+    
+AnnotationProperty: dc:title
+
+    
+Datatype: rdf:PlainLiteral
+
+    
+ObjectProperty: hasState
+
+    Annotations: 
+        rdfs:comment "Specifies that a Site has a a possible configuration State. Used in declarations."@en,
+        rdfs:label "hasState"@en
+    
+    Range: 
+        State
+    
+    InverseOf: 
+        stateOf
+    
+    
+ObjectProperty: lhs
+
+    Annotations: 
+        rdfs:comment "Specifies a pattern on the left-hand side of a Rule."@en,
+        rdfs:label "lhs"@en
+    
+    Domain: 
+        Rule
+    
+    Range: 
+        Pattern
+    
+    InverseOf: 
+        lhsOf
+    
+    
+ObjectProperty: owl:topObjectProperty
+
+    
+ObjectProperty: hasSite
+
+    Annotations: 
+        rdfs:label "hasSite"@en,
+        rdfs:comment "Specifies that an Agent has a Site."@en
+    
+    Range: 
+        Site
+    
+    InverseOf: 
+        siteOf
+    
+    
+ObjectProperty: lhsOf
+
+    Annotations: 
+        rdfs:label "lhsOf"@en,
+        rdfs:comment "The left-hand side of an Rule"@en
+    
+    Domain: 
+        Pattern
+    
+    Range: 
+        Rule
+    
+    InverseOf: 
+        lhs
+    
+    
+ObjectProperty: agent
+
+    Annotations: 
+        rdfs:comment "Specifies which Agent a pattern is meant to match."@en,
+        rdfs:label "agent"@en
+    
+    Domain: 
+        Pattern
+    
+    Range: 
+        Agent
+    
+    
+ObjectProperty: isBoundBy
+
+    Annotations: 
+        rdfs:label "isBoundBy"@en,
+        rdfs:comment "Specifies the bond that a site in a Pattern is bound or unbound."@en
+    
+    SubPropertyOf: 
+        owl:topObjectProperty
+    
+    
+ObjectProperty: rhs
+
+    Annotations: 
+        rdfs:comment "Specifies a pattern on the right-hand side of a Rule."@en,
+        rdfs:label "rhs"@en
+    
+    Domain: 
+        Rule
+    
+    Range: 
+        Pattern
+    
+    InverseOf: 
+        rhsOf
+    
+    
+ObjectProperty: status
+
+    Annotations: 
+        rdfs:label "status"@en,
+        rdfs:comment "Specifies the status of a particular site (and state) in a pattern."@en
+    
+    
+ObjectProperty: stateOf
+
+    Annotations: 
+        rdfs:label "stateOf"@en,
+        rdfs:comment "Specifies that a State is a possible configuration of a Site. Used in declarations."@en
+    
+    Domain: 
+        State
+    
+    Range: 
+        Site
+    
+    InverseOf: 
+        hasState
+    
+    
+ObjectProperty: hasSubrule
+
+    Annotations: 
+        rdfs:label "hasSubrule"@en,
+        rdfs:comment "Specifies that a rule has a subrule, for example part of a KaSim rule which uses tokens. Its value is the identifier for the subrule."@en
+    
+    Domain: 
+        Rule
+    
+    Range: 
+        Rule
+    
+    InverseOf: 
+        subruleOf
+    
+    
+ObjectProperty: siteOf
+
+    Annotations: 
+        rdfs:comment "Specifies that a Site is on an Agent."@en,
+        rdfs:label "siteOf"@en
+    
+    Domain: 
+        Site
+    
+    Range: 
+        Agent
+    
+    InverseOf: 
+        hasSite
+    
+    
+ObjectProperty: subruleOf
+
+    Annotations: 
+        rdfs:comment "Specifies that a rule is subrule of another rule."@en,
+        rdfs:label "subruleOf"@en
+    
+    InverseOf: 
+        hasSubrule
+    
+    
+ObjectProperty: rhsOf
+
+    Annotations: 
+        rdfs:label "rhsOf"@en,
+        rdfs:comment "The right-hand side of an Rule"@en
+    
+    Domain: 
+        Pattern
+    
+    Range: 
+        Rule
+    
+    InverseOf: 
+        rhs
+    
+    
+ObjectProperty: pattern
+
+    Annotations: 
+        rdfs:label "pattern"@en,
+        rdfs:comment "Specifies the pattern that match an observable."@en
+    
+    
+Class: State
+
+    Annotations: 
+        rdfs:comment "A definition of possible internal state of a Site."@en,
+        rdfs:label "State"@en
+    
+    
+Class: owl:Thing
+
+    
+Class: Pattern
+
+    Annotations: 
+        rdfs:label "Pattern"@en,
+        rdfs:comment "A pattern that can match an agent in terms of the state of its sites."@en
+    
+    
+Class: Model
+
+    Annotations: 
+        rdfs:label "Model"@en,
+        rdfs:comment "A model in a rule-based language."@en
+    
+    
+Class: Bound
+
+    Annotations: 
+        rdfs:comment "Specifies that a site in a pattern is bound."@en,
+        rdfs:label "Unknown"@en
+    
+    DisjointWith: 
+        Unbound
+    
+    
+Class: Rule
+
+    Annotations: 
+        rdfs:label "Rule"@en,
+        rdfs:comment "A rule expressing interactions between Agents."@en
+    
+    
+Class: Agent
+
+    Annotations: 
+        rdfs:label "Agent"@en,
+        rdfs:comment "A definition of an entity that can form part of a Rule."@en
+    
+    
+Class: Site
+
+    Annotations: 
+        rdfs:label "Site"@en,
+        rdfs:comment "A definition of a site of an Agent."@en
+    
+    
+Class: Kappa
+
+    Annotations: 
+        rdfs:comment "A model implemented in Kappa."@en,
+        rdfs:label "Kappa"
+    
+    SubClassOf: 
+        Model
+    
+    DisjointWith: 
+        BioNetGen
+    
+    
+Class: Observable
+
+    Annotations: 
+        rdfs:comment "A group of Patterns that is observed or recorded"@en,
+        rdfs:label "Observable"@en
+    
+    
+Class: Unbound
+
+    Annotations: 
+        rdfs:label "Nothing"@en,
+        rdfs:label "Specifies that a site in a pattern is unbound"@en
+    
+    DisjointWith: 
+        Bound
+    
+    
+Class: BioNetGen
+
+    Annotations: 
+        rdfs:comment "A model implemented in BioNetGen."@en,
+        rdfs:label "BioNetGen"@en
+    
+    SubClassOf: 
+        Model
+    
+    DisjointWith: 
+        Kappa
+    
+    
