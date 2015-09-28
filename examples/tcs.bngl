@@ -1,4 +1,4 @@
-#^ @prefix : <https://purl.org/rbm/rbmo/examples/tcs.bgnl#>.
+#^ @prefix : <http://purl.org/rbm/rbmo/examples/tcs.bngl#>.
 #^ @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 #^ @prefix rbmo: <https://purl.org/rbm/rbmo#>.
 #^ @prefix sbol: <http://sbols.org/v1#>.
@@ -17,25 +17,17 @@
 #^ @prefix bqbiol: <http://biomodels.net/biology-qualifiers/>.
 #^ @prefix biopax: <http://www.biopax.org/release/biopax-level3.owl#>.
 
-#^ <https://rbm.rww.io/rbm-examples/tcs.bgnl> a foaf:Document;
-#^   rdfs:label "TCS model in Annotated BioNetGen" ;
-#^   rdfs:seeAlso <http://purl.org/rbm/rbmo>,
-#^                <https://rbm.rww.io/rbmo-examples/tcs.kappa> ,
-#^                <https://github.com/edinburgh-rbm/reaction/blob/master/examples/tcs.kappa> ,
-#^                <https://github.com/edinburgh-rbm/reaction/blob/master/examples/tcs.bgnl> ;
-#^   foaf:primaryTopic :model .
 #^ <http://purl.org/rbm/rbmo> rdfs:label "RBM Ontology" .
-#^ <https://rbm.rww.io/rbmo-examples/tcs.kappa>  rdfs:label "RDF representation of Annotated Kappa TCS model" .
-#^ <https://github.com/edinburgh-rbm/reaction/blob/master/examples/tcs.kappa> rdfs:label "TCS model in Annotated Kappa" .
-#^ <https://github.com/edinburgh-rbm/reaction/blob/master/examples/tcs.bgnl> rdfs:label "TCS model in Annotated BioNetGen" .
+#^ <http://purl.org/rbm/rbmo/examples/tcs.kappa> rdfs:label "TCS model in Annotated Kappa" .
+#^ <http://purl.org/rbm/rbmo/examples/tcs.bngl> rdfs:label "TCS model in Annotated BioNetGen" .
 
 begin model
 
-#^ :model a rbmo:BioNetGen ;
-#^  dct:title "TCS Kappa model" ;
-#^  dct:description "A Kappa moddel of a two-component system. The model represents the combination of a two-component system and a promoter architecture based on dual repression" ;
-#^  dct:creator "Goksel Misirli", "Matteo Cavaliere", "Alejandro Granados" ; 
-#^  foaf:isPrimaryTopicOf <https://purl.org/rbm/rbmo/examples/TCS.kappa> .
+#^ :model a rbmo:Kappa  ;
+#^   dct:title "TCS Kappa model" ;
+#^   dct:description "A Kappa model of a two-component system. The model represents the combination of a two-component system and a promoter architecture based on dual repression" ;
+#^   dct:creator "Goksel Misirli", "Matteo Cavaliere", "Alejandro Granados" ; 
+#^   foaf:isPrimaryTopicOf <http://purl.org/rbm/rbmo/examples/tcs.kappa>, <http://purl.org/rbm/rbmo/examples/tcs.bngl> .
 
 begin parameters
 
@@ -195,7 +187,7 @@ begin molecule types
 #^   sbol:annotation :s1_location ;	
 #^   sbol:annotation :s2_location .	
 #^ :s1	a rbmo:Site ;
-#^   bqbiol:isVersionOf so:SO_0000057 ;
+#^   bqbiol:isVersionOf so:SO:0000057 ;
 #^   biopax:physicalEntity biopax:DnaRegion ;
 #^   sbol:nucleotides "TTCGACA" ;
 #^   sbol:componentType so:SO:0000057 .

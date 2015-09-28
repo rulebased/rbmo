@@ -1,0 +1,308 @@
+ @prefix : <http://purl.org/rbm/rbmo/examples/tcs.kappa#>.
+ @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+ @prefix rbmo: <http://purl.org/rbm/rbmo#>.
+ @prefix sbol: <http://sbols.org/v1#>.
+ @prefix go: <http://identifiers.org/go/>.
+ @prefix so: <http://identifiers.org/so/>.
+ @prefix pr: <http://identifiers.org/pr/>.
+ @prefix ipr: <http://identifiers.org/interpro/>.
+ @prefix chebi:  <http://identifiers.org/chebi/>.
+ @prefix psimod: <http://identifiers.org/psimod/>.
+ @prefix uniprot: <http://identifiers.org/uniprot/> .
+ @prefix sbo: <http://identifiers.org/biomodels.sbo/>.
+ @prefix dct: <http://purl.org/dc/terms/>.
+ @prefix foaf: <http://xmlns.com/foaf/0.1/>.
+ @prefix owl: <http://www.w3.org/2002/07/owl#>.
+ @prefix ro: <http://www.obofoundry.org/ro/ro.owl#>.
+ @prefix bqbiol: <http://biomodels.net/biology-qualifiers/>.
+ @prefix biopax: <http://www.biopax.org/release/biopax-level3.owl#>.
+   
+ <http://purl.org/rbm/rbmo> rdfs:label "RBM Ontology" .
+ <http://purl.org/rbm/rbmo/examples/tcs.kappa> rdfs:label "TCS model in Annotated Kappa" .
+ <http://purl.org/rbm/rbmo/examples/tcs.bngl> rdfs:label "TCS model in Annotated BioNetGen" .
+
+ :model a rbmo:Kappa  ;
+   dct:title "TCS Kappa model" ;
+   dct:description "A Kappa model of a two-component system. The model represents the combination of a two-component system and a promoter architecture based on dual repression" ;
+   dct:creator "Goksel Misirli", "Matteo Cavaliere", "Alejandro Granados" ; 
+   foaf:isPrimaryTopicOf <http://purl.org/rbm/rbmo/examples/tcs.kappa>, <http://purl.org/rbm/rbmo/examples/tcs.bngl> .
+
+ :KinA a rbmo:Agent ;
+   dct:isPartOf :model ;
+   rbmo:hasSite :KinA:H405 ;
+   biopax:physicalEntity biopax:Protein ;
+   bqbiol:is uniprot:P16497 ;
+   ro:has_function go:GO:0000155 .
+
+ :KinA:H405 a rbmo:Site ;
+   rbmo:hasState :KinA:H405:u ;
+   rbmo:hasState :KinA:H405:p ;
+   bqbiol:isVersionOf ipr:IPR009082 .
+ :KinA:H405:u	a rbmo:State ;
+   bqbiol:is pr:PR:000026291 .
+ :KinA:H405:p	a rbmo:State ;
+   bqbiol:is psimod:MOD:00696 .
+
+ :Spo0A a rbmo:Agent ;
+   dct:isPartOf :model ;
+   rbmo:hasSite :Spo0A:RR  ;
+   bqbiol:is uniprot:P06534 ;
+   biopax:physicalEntity biopax:Protein ;
+   ro:has_function go:GO:0000156 .
+ :Spo0A:RR a rbmo:Site ;
+   rbmo:hasState :Spo0A:RR:u ;
+   rbmo:hasState :Spo0A:RR:p ;
+   bqbiol:isVersionOf ipr:IPR001789 .
+ :Spo0A:RR:u a rbmo:State;
+   bqbiol:is pr:PR:000026291 .
+ :Spo0A:RR:p a rbmo:State;
+   bqbiol:is psimod:MOD:00696 .
+ :Spo0A:DNAb a rbmo:Site ;
+   bqbiol:isVersionOf ipr:IPR011991 .
+
+ :A a rbmo:Agent ; 
+   dct:isPartOf :model ;
+   dct:title "Promoter" ;
+   rbmo:hasSite :A:s1 ;
+   rbmo:hasSite :A:s2 ;
+   bqbiol:isVersionOf so:SO:0000167 ;
+   biopax:physicalEntity biopax:DnaRegion ;
+   sbol:nucleotides "TTGATCCCTCTTCACTTCTCAGAATACATACGGTAAAATATACAAAAGAAGATTTTTCGACAAATTCACGTTTCCTTGTTTGTCAAATTTCATTTTTAGTCGAAAAACAGAGAAAAACAT" ;
+   sbol:componentType so:SO:0000167 ;
+   sbol:annotation :A:s1_location ;	
+   sbol:annotation :A:s2_location .	
+ :A:s1 a rbmo:Site ;
+   bqbiol:isVersionOf so:SO:0000057 ;
+   biopax:physicalEntity biopax:DnaRegion ;
+   sbol:nucleotides "TTCGACA" ;
+   sbol:componentType so:SO:0000057 .
+ :A:s2 a rbmo:Site ;
+   bqbiol:isVersionOf so:SO:0000057 ;
+   biopax:physicalEntity biopax:DnaRegion;
+   sbol:nucleotides "AGTCGAA" ;
+   sbol:componentType so:SO:0000057 .
+ :A:s1_location a sbol:SequenceAnnotation ;
+   sbol:bioStart 56;
+   sbol:bioEnd 62 ;
+   sbol:component :A_s1 .  
+ :A:s2_location a sbol:SequenceAnnotation ;
+   sbol:bioStart 98;
+   sbol:bioEnd 104 ;
+   sbol:component :A_s2 . 
+
+
+ :M a rbmo:Agent ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf so:SO:0000234 ;
+   biopax:physicalEntity biopax:Rna .
+
+ :P a rbmo:Agent ;
+   dct:isPartOf :model ;
+   bqbiol:is uniprot:P42212 ;
+   dct:title "Green fluorescent protein" ;
+   biopax:physicalEntity biopax:Protein ;
+   rbmo:hasConfiguration :protein .
+
+ :KKup a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000216 ;
+   dct:title "KinA phosphorylation" ;
+   dct:description "Phosphorylation of Histidine Kinase" .
+
+ :Spo0A_KinA a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000177 ;
+   dct:title "Spo0A-KinA binding" ;
+   dct:description "Binding of Kinase and Response Regulator" .
+
+ :Spo0Au_KinA_off a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180;
+   dct:title "Spo0A(unphos)-KinA unbinding" ;
+   dct:description "Unbinding of Kinase and Unphosphorylated Regulator" .
+
+ :Spo0Ap_KinA_off a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180 ;
+   dct:title "Spo0A(phosp)-KinA unbinding" ;
+   dct:description "Unbinding of Kinase and Phosporilated Regulator" .
+
+ :KinAtoSpo0A a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000216 ;
+   dct:title "Spo0A-Kina Phosphotransfer" ;
+   dct:description "Phosphorylation (Phosphotransfer) of Response Regulator" .
+
+ :Spo0AtoKinA a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000330 ;
+   dct:title "Spo0A Unphosphorylation" ;
+   dct:description "Unphosphorylation of Response Regulator when not bound to DNA" .
+
+ :Spo0Ap-depho a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000330 ;
+   dct:title "Spo0A Unphosphorylation" ;
+   dct:description "Unphosphorylation of Response Regulator when not bound to Kinase" .
+
+ :Spo0A-As1 a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0008134 ;
+   dct:title "Spo0A binding to Operator 1" ;
+   dct:description "Phosphorylated Response Regulator binds to to the Transcription Binding Site 1" .
+
+ :Spo0A-As2 a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0008134 ;
+   dct:title "Spo0A binding to Operator 2" ;
+   dct:description "Phosphorylated Response Regulator binds to to the Transcription Binding Site 1" .
+
+ :As1-Spo0A a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180 ;
+   dct:title "Spo0A unbinding from Operator 1" ;
+   dct:description "Phosphorylated Response Regulator unbinds from the Transcription Binding Site 1" .
+
+ :As2-Spo0A a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180 ;
+   dct:title "Spo0A unbinding from Operator 2" ;
+   dct:description "Phosphorylated Response Regulator unbinds from the Transcription Binding Site 2".
+
+ :As1As2Spo0A_to_As2Spo0A a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180 ;
+   dct:title "Cooperative unbinding: Spo0A unbinds from Operator 1" ;
+   dct:description "Phosphorylated Response Regulator unbinds from Transcription Binding Site 1 while remains bound to the Transcription Binding Site 2" .
+
+ :As1As2Spo0A_to_As1Spo0A a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000180 ;
+   dct:title "Cooperative unbinding: Spo0A unbinds from Operator 2" ;
+   dct:description "Phosphorylated Response Regulator unbinds from Transcription Binding Site 2 while remains bound to the Transcription Binding Site 1" .
+ 
+ :transcription a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0009299 ;
+   bqbiol:isVersionOf go:SBO:0000183 ;
+   dct:title "Transcription" ;
+   dct:description "Transcription occurs when both operators are free" .
+
+ :translation a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0006412 ;
+   bqbiol:isVersionOf go:SBO:0000184 ;
+   dct:title "Translation" ;
+   dct:description "Translation rate" .
+
+ :p_degradation a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0009056 ;
+   dct:title "Protein Degradation" ;
+   dct:description "Protein degradation rate" .
+
+ :m_degradation a rbmo:Rule ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf go:GO:0009056 ;
+   dct:title "Mrna Degradation" ;
+   dct:description "Mrna Degradation Rate" .
+
+ :kk_p a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000153 ;
+   dct:title "Phosphorylation Rate" ;
+   dct:description "Phosphorylation Rate" .
+
+ :k_spo0a_KinA a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000153;
+   dct:title "Spo0a-KinA Binding Rate" ;
+   dct:description "Binding Rate of Kinase and Response Regulator" .
+
+ :k_spo0a_KinA_off a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "spo0a(u)-KinA ur" ;
+   dct:description "spo0a(u)-KinA unbinding rate" .
+
+ :k_spo0a_KinAp_off a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "Spo0a(unphosp)-KinA Unbinding Rate" ;
+   dct:description "Unbinding Rate of Kinase and Response Regulator when Unphosphorylated" .
+
+ :k_KinAtospo0a a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000153 ;
+   dct:title " Spo0a Phosphotransfer Rate" ;
+   dct:description "Phosphorylation (Phosphotransfer) Rate of Response Regulator when bound to Phosphorylated Kinase".
+
+ :k_spo0atoKinA a rbmo:Expression, sbo:SBO:0000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "Spo0a Unphosphorylation Rate" ;
+   dct:description "Unphosphorylation Rate of Response Regulator when not bound to DNA" .
+
+ :k_spo0ap_depho a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "Spo0a Unphosphorylation Rate" ;
+   dct:description "Spo0a Unphosphorylation Rate when not bound to Kinase" .
+
+ :c a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "Cooperativity Coefficient" ;
+   dct:description "Cooperativity Coefficient for Unbinding" .
+
+ :k1 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000186 ;
+   dct:title "Transcription Rate" ;
+   dct:description "Transcription Rate" .
+
+ :k2 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000331 ;
+   dct:title "Mrna Degredation Rate" ;
+   dct:description "Mrna Degradation Rate" .
+
+ :k3 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000331 ;
+   dct:title "Protein Degradation Rate" ;
+   dct:description "Protein Degradation Rate" .
+
+ :k7 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000044 ;
+   dct:title "Translation Rate" ;
+   dct:description "Translation Rate".
+
+ :k10 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000153 ;
+   dct:title "Binding Rate" ;
+   dct:description "Binding Rate to the Operator" .
+
+ :k11 a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "Unbinding Rate" ;
+   dct:description "Unbinding Rate from the Operator" .
+
+ :comb_u a rbmo:Expression, sbo:SBO:00000002 ;
+   dct:isPartOf :model ;
+   bqbiol:isVersionOf sbo:SBO:0000156 ;
+   dct:title "cooperative unbinding rate" ;
+   dct:description "Cooperative Unbinding Rate from any Operator" .
+
+ :FreeProm a rbmo:Observable ;
+   dct:isPartOf :model .
+
+ :Spo0A_p a rbmo:Observable ;
+   dct:isPartOf :model ;
+   ro:has_function go:GO:0045893 .
+
+ :protein a rbmo:Observable ;
+   dct:isPartOf :model .

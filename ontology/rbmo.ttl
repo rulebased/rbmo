@@ -12,7 +12,8 @@
                                 
                                 rdfs:label "Rule-Based Model Ontology"@en ;
                                 
-                                dc:creator "Goksel Misirli" ;
+                                dc:creator "Matteo Cavaliere" ,
+                                           "Goksel Misirli" ;
                                 
                                 rdfs:comment "RBMO - An ontology for annotating rule-based models"@en ;
                                 
@@ -314,15 +315,15 @@ owl:topObjectProperty rdf:type owl:ObjectProperty .
 
 
 
-###  http://www.purl.org/rbm/rbmo#Bound
+###  http://www.purl.org/rbm/rbmo#BoundState
 
-:Bound rdf:type owl:Class ;
-       
-       rdfs:label "Unknown"@en ;
-       
-       owl:disjointWith :Unbound ;
-       
-       rdfs:comment "Specifies that a site in a pattern is bound."@en .
+:BoundState rdf:type owl:Class ;
+            
+            rdfs:label "Unknown"@en ;
+            
+            owl:disjointWith :UnboundState ;
+            
+            rdfs:comment "Specifies that a site in a pattern is bound."@en .
 
 
 
@@ -398,12 +399,12 @@ owl:topObjectProperty rdf:type owl:ObjectProperty .
 
 
 
-###  http://www.purl.org/rbm/rbmo#Unbound
+###  http://www.purl.org/rbm/rbmo#UnboundState
 
-:Unbound rdf:type owl:Class ;
-         
-         rdfs:label "Nothing"@en ,
-                    "Specifies that a site in a pattern is unbound"@en .
+:UnboundState rdf:type owl:Class ;
+              
+              rdfs:label "Nothing"@en ,
+                         "Specifies that a site in a pattern is unbound"@en .
 
 
 

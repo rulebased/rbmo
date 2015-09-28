@@ -7,11 +7,7 @@ Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
 Prefix: foaf: <http://xmlns.com/foaf/0.1/>
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-
-
 Ontology: <http://www.purl.org/rbm/rbmo#>
-
-
 Annotations: 
     rdfs:comment "RBMO - An ontology for annotating rule-based models"@en,
     dc:creator "Goksel Misirli",
@@ -253,14 +249,14 @@ Class: Model
         rdfs:comment "A model in a rule-based language."@en
     
     
-Class: Bound
+Class: BoundState
 
     Annotations: 
         rdfs:comment "Specifies that a site in a pattern is bound."@en,
         rdfs:label "Unknown"@en
     
     DisjointWith: 
-        Unbound
+        UnboundState
     
     
 Class: Rule
@@ -304,14 +300,14 @@ Class: Observable
         rdfs:label "Observable"@en
     
     
-Class: Unbound
+Class: UnboundState
 
     Annotations: 
         rdfs:label "Nothing"@en,
         rdfs:label "Specifies that a site in a pattern is unbound"@en
     
     DisjointWith: 
-        Bound
+        BoundState
     
     
 Class: BioNetGen
