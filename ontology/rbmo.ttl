@@ -110,6 +110,8 @@ rdf:PlainLiteral rdf:type rdfs:Datatype .
          
          rdfs:comment "Specifies that an Agent has a Site."@en ;
          
+         rdfs:domain :Agent ;
+         
          rdfs:range :Site ;
          
          owl:inverseOf :siteOf .
@@ -123,6 +125,8 @@ rdf:PlainLiteral rdf:type rdfs:Datatype .
           rdfs:label "hasState"@en ;
           
           rdfs:comment "Specifies that a Site has a a possible configuration State. Used in declarations."@en ;
+          
+          rdfs:domain :Site ;
           
           rdfs:range :State ;
           
@@ -146,6 +150,17 @@ rdf:PlainLiteral rdf:type rdfs:Datatype .
 
 
 
+###  http://www.purl.org/rbm/rbmo#internalState
+
+:internalState rdf:type owl:ObjectProperty ;
+               
+               rdfs:label "Links a status in a Pattern to a State"@en ,
+                          "internalState"@en ;
+               
+               rdfs:range :State .
+
+
+
 ###  http://www.purl.org/rbm/rbmo#isBoundBy
 
 :isBoundBy rdf:type owl:ObjectProperty ;
@@ -155,6 +170,18 @@ rdf:PlainLiteral rdf:type rdfs:Datatype .
            rdfs:comment "Specifies the bond that a site in a Pattern is bound or unbound."@en ;
            
            rdfs:subPropertyOf owl:topObjectProperty .
+
+
+
+###  http://www.purl.org/rbm/rbmo#isStatusOf
+
+:isStatusOf rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "isStatusOf"@en ;
+            
+            rdfs:comment "Links a status in a Pattern to a Site"@en ;
+            
+            rdfs:range :Site .
 
 
 

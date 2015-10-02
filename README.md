@@ -26,16 +26,14 @@ The model represents the combination of a two-component system and a promoter ar
 | Agent  | Type for entities that represent biological entities participating in a rule.|
 | Site   | Type for sites of agents.|
 | State  | Type for internal states of sites.|
-| Configuration | Specifies a configuration of an agent in terms of the status of its sites.|
+| Pattern | Type of a pattern as it appears in a Rule or Observable.|
+| Observable | Type for agent patterns counted by a simulation.|
 | Model | To indicate a model type.|
 | Kappa | To indicate a model type as Kappa.|
 | BioNetGen | To indicate a model type as BioNetGen.|
-| Compartment | Type for compartments.|
 | hasSite | Specifies that an agent has a site. Its value is the identifier for the site.|
 | hasState | Specifies that an site has an internal state. Its value is the identifier for the state.|
-| stateAssignment | Links a state to its value, e.g. a term from an external ontology.|
-| subrule | Specifies that a rule has a subrule (such as a KaSim rule that uses tokens). Its value is the identifier for the subrule. |
-| hasConfiguration | Specifies that a special configuration of an agent includes additional information.|
+| hasSubrule | Specifies that a rule has a subrule (such as a KaSim rule that uses tokens).|
 
 ##Contributors
 ![alt tag](images/newcastle.gif) ![alt tag](images/icos.png)

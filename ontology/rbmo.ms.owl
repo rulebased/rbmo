@@ -7,19 +7,23 @@ Prefix: xsd: <http://www.w3.org/2001/XMLSchema#>
 Prefix: foaf: <http://xmlns.com/foaf/0.1/>
 Prefix: rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
+
+
 Ontology: <http://www.purl.org/rbm/rbmo#>
+
+
 Annotations: 
+    dc:creator "Matteo Cavaliere",
     rdfs:comment "RBMO - An ontology for annotating rule-based models"@en,
     dc:creator "Goksel Misirli",
     rdfs:label "Rule-Based Model Ontology"@en,
-    dc:creator "Matthew Pocock",
     dc:creator "William Waites",
-    dc:creator "Matteo Cavaliere"
+    dc:creator "Matthew Pocock"
 
-AnnotationProperty: rdfs:seeAlso
+AnnotationProperty: dc:creator
 
     
-AnnotationProperty: dc:creator
+AnnotationProperty: rdfs:seeAlso
 
     
 AnnotationProperty: dc:date
@@ -37,11 +41,24 @@ AnnotationProperty: dc:title
 Datatype: rdf:PlainLiteral
 
     
+ObjectProperty: isStatusOf
+
+    Annotations: 
+        rdfs:label "isStatusOf"@en,
+        rdfs:comment "Links a status in a Pattern to a Site"@en
+    
+    Range: 
+        Site
+    
+    
 ObjectProperty: hasState
 
     Annotations: 
         rdfs:comment "Specifies that a Site has a a possible configuration State. Used in declarations."@en,
         rdfs:label "hasState"@en
+    
+    Domain: 
+        Site
     
     Range: 
         State
@@ -66,14 +83,14 @@ ObjectProperty: lhs
         lhsOf
     
     
-ObjectProperty: owl:topObjectProperty
-
-    
 ObjectProperty: hasSite
 
     Annotations: 
         rdfs:label "hasSite"@en,
         rdfs:comment "Specifies that an Agent has a Site."@en
+    
+    Domain: 
+        Agent
     
     Range: 
         Site
@@ -81,6 +98,9 @@ ObjectProperty: hasSite
     InverseOf: 
         siteOf
     
+    
+ObjectProperty: owl:topObjectProperty
+
     
 ObjectProperty: lhsOf
 
@@ -142,6 +162,16 @@ ObjectProperty: status
     Annotations: 
         rdfs:label "status"@en,
         rdfs:comment "Specifies the status of a particular site (and state) in a pattern."@en
+    
+    
+ObjectProperty: internalState
+
+    Annotations: 
+        rdfs:label "Links a status in a Pattern to a State"@en,
+        rdfs:label "internalState"@en
+    
+    Range: 
+        State
     
     
 ObjectProperty: stateOf
@@ -225,13 +255,6 @@ ObjectProperty: pattern
         rdfs:comment "Specifies the pattern that match an observable."@en
     
     
-Class: State
-
-    Annotations: 
-        rdfs:comment "A definition of possible internal state of a Site."@en,
-        rdfs:label "State"@en
-    
-    
 Class: owl:Thing
 
     
@@ -242,11 +265,35 @@ Class: Pattern
         rdfs:comment "A pattern that can match an agent in terms of the state of its sites."@en
     
     
+Class: State
+
+    Annotations: 
+        rdfs:comment "A definition of possible internal state of a Site."@en,
+        rdfs:label "State"@en
+    
+    
+Class: UnboundState
+
+    Annotations: 
+        rdfs:label "Nothing"@en,
+        rdfs:label "Specifies that a site in a pattern is unbound"@en
+    
+    DisjointWith: 
+        BoundState
+    
+    
 Class: Model
 
     Annotations: 
         rdfs:label "Model"@en,
         rdfs:comment "A model in a rule-based language."@en
+    
+    
+Class: Rule
+
+    Annotations: 
+        rdfs:label "Rule"@en,
+        rdfs:comment "A rule expressing interactions between Agents."@en
     
     
 Class: BoundState
@@ -257,13 +304,6 @@ Class: BoundState
     
     DisjointWith: 
         UnboundState
-    
-    
-Class: Rule
-
-    Annotations: 
-        rdfs:label "Rule"@en,
-        rdfs:comment "A rule expressing interactions between Agents."@en
     
     
 Class: Agent
@@ -298,16 +338,6 @@ Class: Observable
     Annotations: 
         rdfs:comment "A group of Patterns that is observed or recorded"@en,
         rdfs:label "Observable"@en
-    
-    
-Class: UnboundState
-
-    Annotations: 
-        rdfs:label "Nothing"@en,
-        rdfs:label "Specifies that a site in a pattern is unbound"@en
-    
-    DisjointWith: 
-        BoundState
     
     
 Class: BioNetGen
