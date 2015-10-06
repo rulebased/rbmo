@@ -1,0 +1,53 @@
+##
+## Extracts a simple forward contact graph from the RDF
+## representation of Kappa rules
+##
+
+PREFIX rbmo: <http://purl.org/rbm/rbmo#>
+
+SELECT DISTINCT ?rule ?contact_agent ?contact_site WHERE {
+
+   ## the left hand side of a rule has an agent 
+   ## with a site bound to nothing
+   ?rule rbmo:lhs [
+       rbmo:agent ?agent;
+       rbmo:status [
+          a rbmo:UnboundState;
+          rbmo:isStatusOf ?site
+       ]
+   ] .
+
+   ## and another
+   ?rule rbmo:lhs [
+       rbmo:agent ?contact_agent;
+       rbmo:status [
+           a rbmo:UnboundState;
+           rbmo:isStatusOf ?contactSite
+       ]
+   ] .
+
+   ## the right hand side of a rule has the same
+   ## agent with the site bound to something.
+   ?rule rbmo:rhs [
+       rbmo:agent ?agent;
+       rbmo:status [
+          rbmo:isBoundBy ?binding;
+          rbmo:isStatusOf ?site
+       ]
+   ] .
+
+   ## now we find the agents, and sites on the right hand 
+   ## side who have become bound
+   ?rule rbmo:rhs [
+       rbmo:agent ?contact_agent;
+       rbmo:status [
+           rbmo:isBoundBy ?binding;
+           rbmo:isStatusOf ?contact_site
+       ]
+   ] .
+
+   ## this filter is necessary to check that the binding
+   ## actually is one, that is blank nodes are used to
+   ## bind sites
+   FILTER isBlank(?binding)
+}

@@ -1,0 +1,89 @@
+name:                krdf
+
+-- The package version.  See the Haskell package versioning policy (PVP) 
+-- for standards guiding when and how versions should be incremented.
+-- http://www.haskell.org/haskellwiki/Package_versioning_policy
+-- PVP summary:      +-+------- breaking API changes
+--                   | | +----- non-breaking API additions
+--                   | | | +--- code changes with no API change
+version:             0.1.0.0
+synopsis:            Kappa to RDF Converter
+
+-- A longer description of the package.
+-- description:         
+
+extra-source-files: Tests.hs README.md
+
+-- URL for the project homepage or repository.
+homepage:            http://purl.org/rbm/rbmo/krdf
+license:             GPL-3
+license-file:        LICENSE
+author:              William Waites
+maintainer:          wwaites@tardis.ed.ac.uk
+category:            Math
+build-type:          Simple
+cabal-version:       >=1.16
+
+library
+  ghc-options: -Wall
+  -- Modules exported by the library.
+  other-extensions: QuasiQuotes ParallelListComp NamedFieldPuns
+  exposed-modules:     
+    Krdf.Kappa
+    Krdf.Kappa.Rdf
+    Krdf.Kappa.Vocabulary
+    Krdf.Reaction
+  other-modules:       
+    Krdf.Internal.KappaAST
+    Krdf.Internal.KappaParser
+    Krdf.Internal.KappaQuotes
+    Krdf.Internal.KappaUtil
+    Krdf.Internal.ReactionQuotes
+
+  -- Other library packages from which modules are imported.
+  build-depends:       base >=4.6,
+                       attoparsec,
+                       containers,
+                       multiset,
+                       network-uri,
+                       swish,
+                       template-haskell,
+                       text,
+                       unordered-containers
+  default-language:    Haskell2010
+
+executable krdf
+  ghc-options: -Wall
+  default-extensions:  NamedFieldPuns
+  main-is: krdf.hs
+  build-depends:       base >=4.6,
+                       attoparsec,
+                       containers,
+                       multiset,
+                       network-uri,
+                       optparse-applicative,
+                       swish,
+                       template-haskell,
+                       text,
+                       unordered-containers
+  default-language:    Haskell2010
+
+
+test-suite functional
+  ghc-options: -Wall
+  default-extensions:  OverloadedStrings
+  type: exitcode-stdio-1.0
+  main-is: Tests.hs
+  build-depends:       base >=4.6,
+                       HUnit,
+                       attoparsec,
+                       containers,
+                       multiset,
+                       template-haskell,
+                       text,
+                       unordered-containers
+  default-language:    Haskell2010
+
+-- Local Variables:
+-- compile-command: "cabal build; cabal test"
+-- End:
