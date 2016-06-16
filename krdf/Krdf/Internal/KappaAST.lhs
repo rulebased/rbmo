@@ -233,7 +233,7 @@ data Expr =
 data VarD = VarD Text Expr deriving (Show, Eq, Ord)
 data TokD = TokD Text deriving (Show, Eq, Ord)
 data Obs  = Obs Text AgentP deriving (Show, Eq, Ord)
-data Init = Init Double AgentP deriving (Show, Eq, Ord)
+data Init = Init Double [AgentP] deriving (Show, Eq, Ord)
 data Statement =
   AD AgentD | VD VarD | TD TokD | RD Rule | OB Obs | IN Init | RDF Text
   deriving (Show, Eq)

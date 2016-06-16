@@ -79,7 +79,7 @@ agent_sig :: Parser AgentD
 agent_sig = do
   name  <- tok
   _     <- char '('
-  sites <- site_sig `sepBy` char ','
+  sites <- site_sig `sepBy` (char ',' >> many space)
   _     <- char ')'
   return $ AgentD name (fromList sites)
 
@@ -247,7 +247,7 @@ site_pat = statefirst <|> linkfirst <|> justlink
 agent_pat :: Parser AgentP
 agent_pat = do
   name   <- tok
-  _      <- char '('
+  _      <- many space >> char '('
   states <- site_pat `sepBy` (many space >> char ',' >> many space)
   _      <- char ')'
   return $ AgentP name (fromList states)
@@ -308,7 +308,7 @@ init_dec = do
   _ <- (string $ pack "%init:") >> many space
   n <- double
   _ <- many space
-  a <- agent_pat
+  a <- agent_pat `sepBy` (char ',' >> many space)
   return [IN $ Init n a]
 
 -- | Parse an RDF line
