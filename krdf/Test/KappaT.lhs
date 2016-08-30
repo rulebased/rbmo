@@ -95,7 +95,7 @@ testParseKappa = map (\(s,l) -> l ~=? parse s) $ k
                                                            , ("s2", (Unbound, Undefined))]))
              ])
           , ("%init: 500 KinA()",
-             [ IN $ Init 500.0 (AgentP "KinA" (H.fromList [])) ])
+             [ IN $ Init 500.0 [AgentP "KinA" (H.fromList [])] ])
           ]
         parse s = case parseOnly kappaParser (pack s) of
           Right r  -> r
