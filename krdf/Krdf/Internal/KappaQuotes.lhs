@@ -38,7 +38,7 @@ strip p = do
   a <- p
   _ <- many space
   return a
-  
+
 agent :: QuasiQuoter
 agent = QuasiQuoter {
   quoteExp = \s -> case parseOnly (strip agent_sig) (pack s) of
@@ -51,7 +51,7 @@ agent = QuasiQuoter {
 
 complex_q :: Parser [AgentP]
 complex_q = strip $ agent_pat `sepBy` (many space >> char ',' >> many space)
-  
+
 complex :: QuasiQuoter
 complex = QuasiQuoter {
   quoteExp = \s -> case parseOnly complex_q (pack s) of
@@ -74,5 +74,5 @@ rule = QuasiQuoter {
 \end{code}
 
 % Local Variables:
-% compile-command: "cd ../..; cabal build && cabal test"
+% compile-command: "cd ../..; stack test"
 % End:

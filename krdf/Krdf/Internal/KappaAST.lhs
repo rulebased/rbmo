@@ -189,10 +189,11 @@ instance Ord AgentD where
 \subsection{Rules}
 
 \begin{code}
-data Rule    = Rule { lhs  :: ([AgentP], [TokE])
-                    , rhs  :: ([AgentP], [TokE])
-                    , rate :: Expr
-                    , desc :: Text
+data Rule    = Rule { lhs   :: ([AgentP], [TokE])
+                    , rhs   :: ([AgentP], [TokE])
+                    , rate  :: Expr
+                    , rateC :: Expr
+                    , desc  :: Text
                     }
              deriving (Show, Eq)
 \end{code}
@@ -205,10 +206,11 @@ data TokE    = Tok Text Expr
 \hide{
 \begin{code}
 defaultRule :: Rule
-defaultRule = Rule { lhs = undefined
-                   , rhs = undefined
-                   , rate = Lit 1.0
-                   , desc = pack "" }
+defaultRule = Rule { lhs   = undefined
+                   , rhs   = undefined
+                   , rate  = Lit 1.0
+                   , rateC = Lit 0.0
+                   , desc  = pack "" }
 
 data Expr =
   Var Text |
@@ -323,6 +325,9 @@ rhsN  = mkName "Krdf.Kappa.rhs"
 rateN :: Name
 rateN = mkName "Krdf.Kappa.rate"
 
+rateCN :: Name
+rateCN = mkName "Krdf.Kappa.rateC"
+
 descN :: Name
 descN = mkName "Krdf.Kappa.desc"
 
@@ -338,7 +343,7 @@ instance Lift AgentP where
         ll <- lift l
         ss <- lift s
         return (TupE [liftText k, (TupE [ll, ss])])
-        
+
 instance Lift LinkP where
   lift Bound      = [| Bound |]
   lift Unbound    = [| Unbound |]
@@ -366,13 +371,15 @@ instance Lift AgentD where
         (TupE [liftText k, ListE (map liftText ss)])
 
 instance Lift Rule where
-  lift (Rule { lhs=lh, rhs=rh, rate=r, desc=d }) = do
+  lift (Rule { lhs=lh, rhs=rh, rate=r, rateC=rc, desc=d }) = do
     llh <- lift lh
     lrh <- lift rh
     lr  <- lift r
+    lrc <- lift rc
     return (RecConE ruleN [ (lhsN, llh)
                           , (rhsN, lrh)
                           , (rateN, lr)
+                          , (rateCN, lrc)
                           , (descN, liftText d) ])
 
 instance Lift TokE where

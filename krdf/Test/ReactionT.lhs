@@ -34,5 +34,5 @@ testQuasiQuotes = map (\(l,q) -> l ~=? q) $ zip literal quoted
           |]
 \end{code}
 %% Local Variables:
-%% compile-command: "cd ..; cabal build && cabal test"
+%% compile-command: "cd ..; stack test"
 %% End:

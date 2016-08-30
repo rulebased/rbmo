@@ -51,20 +51,20 @@ testParseKappa = map (\(s,l) -> l ~=? parse s) $ k
                         ], []),
                  rhs = ([AgentP "B" (H.fromList [("y", (Unbound, (State "0")))])
                         ], []),
-                 rate = Lit 1.0,
+                 rate = Lit 1.0, rateC = Lit 0.0,
                  desc = pack "my rule"
              } ])
           , ("'bi rule' A(x!_) <-> B(y) @k_1, 'k_2'",
              [ RD Rule {
                   lhs = ([ AgentP "A" (H.fromList [("x", (Bound, Undefined))])], []),
                   rhs = ([ AgentP "B" (H.fromList [("y", (Unbound, Undefined))])], []),
-                  rate = Var "k_1",
+                  rate = Var "k_1", rateC = Lit 0.0,
                   desc = pack "bi rule"
                   }
              , RD Rule {
                   lhs = ([ AgentP "B" (H.fromList [("y", (Unbound, Undefined))])], []),
                   rhs = ([ AgentP "A" (H.fromList [("x", (Bound, Undefined))])], []),
-                  rate = Var "k_2",
+                  rate = Var "k_2", rateC = Lit 0.0,
                   desc = pack "bi rule"
                   }
              ])
@@ -74,10 +74,21 @@ testParseKappa = map (\(s,l) -> l ~=? parse s) $ k
                          , AgentP "K" (H.fromList [("y", ((Link "1"), Undefined))])], []),
                   rhs = ([ AgentP "S" (H.fromList [("x", (Unbound, (State "p")))])
                          , AgentP "K" (H.fromList [("y", (Unbound, Undefined))])], []),
-                  rate = Var "k",
+                  rate = Var "k", rateC = Lit 0.0,
                   desc = pack "hybrid rule"
                   }
              ])
+          , ("'circuit rule' S(x!1~u),K(y!1) -> S(x~p),K(y) @ 'k1' ('k2')",
+             [ RD Rule {
+                  lhs = ([ AgentP "S" (H.fromList [("x", ((Link "1"), (State "u")))])
+                         , AgentP "K" (H.fromList [("y", ((Link "1"), Undefined))])], []),
+                  rhs = ([ AgentP "S" (H.fromList [("x", (Unbound, (State "p")))])
+                         , AgentP "K" (H.fromList [("y", (Unbound, Undefined))])], []),
+                  rate = Var "k1", rateC = Var "k2",
+                  desc = pack "circuit rule"
+                  }
+             ]
+            )
           , ("'hybrid rule' S(x~u!1),K(y!1) | 0.1:atp -> S(x~p),K(y) | 0.1:adp @ 'k'",
              [ RD Rule {
                   lhs = ([ AgentP "S" (H.fromList [("x", ((Link "1"), (State "u")))])
@@ -86,7 +97,7 @@ testParseKappa = map (\(s,l) -> l ~=? parse s) $ k
                   rhs = ([ AgentP "S" (H.fromList [("x", (Unbound, (State "p")))])
                          , AgentP "K" (H.fromList [("y", (Unbound, Undefined))])
                          ], [Tok "adp" (Lit 0.1)]),
-                  rate = Var "k",
+                  rate = Var "k", rateC = Lit 0.0,
                   desc = pack "hybrid rule"
                   }
              ])
@@ -109,7 +120,7 @@ testRuleQQ = [l ~=? s | (l,s) <- t]
                          , AgentP "A" (H.fromList [("x", (Unbound, Undefined))])], []),
                   rhs = ([ AgentP "A" (H.fromList [("x", (Link "1", Undefined))])
                          , AgentP "A" (H.fromList [("x", (Link "1", Undefined))])], []),
-                  rate = Lit 1.0,
+                  rate = Lit 1.0, rateC = Lit 0.0,
                   desc = pack "homodimer"
                  } ])
             ]
@@ -186,5 +197,5 @@ testLinks = [
   where f = L.nub . concat . map links 
 \end{code}
 %% Local Variables:
-%% compile-command: "cd ..; cabal build; cabal test"
+%% compile-command: "cd ..; stack test"
 %% End:

@@ -21,7 +21,7 @@ module Krdf.Internal.KappaParser where
 
 import Prelude hiding (takeWhile)
 
-import Control.Applicative ((<|>), (<$>), many)
+import Control.Applicative ((<|>), many)
 import Data.Attoparsec.Text
 import Data.HashMap.Lazy(fromList)
 import Data.Text(Text, pack, cons)
@@ -192,14 +192,23 @@ expr_infix =
   e_infix Pow "^" <|>
   e_infix Div "/" <|>
   e_infix Mod "[mod]"
-       
-       
+
+-- | Parse an expression surrounded by round brackets
+bkt_expr :: Parser Expr
+bkt_expr = do
+  _ <- char '('
+  _ <- many space
+  e <- expr
+  _ <- many space
+  _ <- char ')'
+  return e
+
 -- | Parse a rule
 rule_pat :: Parser [Rule]
 rule_pat = do
   d  <- qstr <|> tok
   _  <- many1 space
-  rs <- pure_rule <|> bi_rule
+  rs <- circ_rule <|> bi_rule <|> pure_rule
   return $ map (\r -> r { desc = d }) rs
 
 rule_dec :: Parser [Statement]
@@ -288,10 +297,25 @@ bi_rule = do
   _ <- many space >> char '@' >> many space
   kf <- expr
   _ <- many space >> char ',' >> many space
-  kr <- expr
+  kr <- expr <|> bkt_expr
   return [ defaultRule { lhs = (l, lt), rhs = (r, rt), rate = kf }
          , defaultRule { lhs = (r, rt), rhs = (l, lt), rate = kr }
          ]
+
+-- | Parse a circuit rule (two rates, one enclosed in round brackets)
+circ_rule :: Parser [Rule]
+circ_rule = do
+  l  <- agent_pat `sepBy` (many space >> char ',' >> many space)
+  lt <- tok_exprs <|> return []
+  _  <- many space >> string (pack "->") >> many space
+  r  <- agent_pat `sepBy` (many space >> char ',' >> many space)
+  rt <- tok_exprs <|> return []
+  _  <- many space >> char '@' >> many space
+  k  <- expr
+  _  <- many space >> char '(' >> many space
+  kc <- expr
+  _  <- many space >> char ')'
+  return [ defaultRule { lhs = (l, lt), rhs = (r, rt), rate = k, rateC = kc }]
 
 -- | Parse an observation declaration
 obs_dec :: Parser [Statement]
