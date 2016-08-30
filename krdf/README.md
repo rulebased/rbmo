@@ -10,32 +10,35 @@ https://github.com/wwaites/reaction
 
 ### Quick start:
 
- * [optional] Make sure you have a recent version of the cabal tool
-   that supports "sandbox" and do
+This software now recommends the use of [Stack](https://haskellstack.org/)
+for installation, so it is not required to have Haskell installed system-wide
+and this package builds with a consistent version. Therefore, once Stack is
+present according to the instructions on their web page, building consistes of: 
+
+ * Initialising the project,
 ```
-% cabal sandbox init
+% stack init
 ```
- * Install dependencies
+
+ * Building the software
 ```
-% cabal install --only-dependencies
-% cabal install hunit
+% stack build
 ```
  * Check that everything is working properly
 ```
-% cabal build
-% cabal test
+% stack test
 ...
 1 of 1 test suites (1 of 1 test cases) passed.
 ```
  * Investigate things in the REPL. For example,
 ```
-% cabal repl
+% stack repl
 Flow.Kappa> declare [complex| A(x!1), A(x~2!1,y~p), A(x~1), B(u,v,w~1) |]
 [A(x~1~2,y),B(w,u,v)]
 ```
  * Look at a materialised RDF version of an example model
 ```
-% ./dist/build/krdf/krdf -f ../examples/tcs.kappa -a -n -m
+% stack exec krdf -- -f ../examples/tcs.kappa -a -n -m
 ```
 
 ### The krdf tool
