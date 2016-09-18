@@ -80,8 +80,8 @@ main = do
       ( fullDesc
      <> progDesc "Transform Kappa rules to RDF"
      <> header "Kappa -> RDF" )
-           
+
 -- Local Variables:
--- compile-command: "cabal build"
+-- compile-command: "stack build"
 -- End:
-  
+
